@@ -1,0 +1,32 @@
+{
+  "name": "hmm",
+  "version": "1.0.0",
+  "description": "Find the most likely annotations of a sequence",
+  "main": "config.js",
+  "scripts": {
+    "deploy": "git checkout gh-pages && git rebase master && git push && git checkout master",
+    "start": "node_modules/.bin/live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radotzki/hmm.git"
+  },
+  "author": "@radotzki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radotzki/hmm/issues"
+  },
+  "homepage": "https://github.com/radotzki/hmm#readme",
+  "dependencies": {
+    "angular2": "2.0.0-beta.17",
+    "lodash": "4.11.2",
+    "zone.js": "0.6.12",
+    "es6-shim": "0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.6"
+  },
+  "devDependencies": {
+    "live-server": "^0.9.2"
+  }
+}
