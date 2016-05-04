@@ -2,8 +2,9 @@
 
 #### How to run
 - Install node
-- clone this repository
-- run `npm start`
+- Clone this repository
+- Viterbi: run `npm run start:viterbi`
+- Posterior Decoding: run `npm run start:posterior-decoding`
 
 #### This is a small project that computes:
 - The most likely annotations of a sequence given an HMM (Viterbi algorithm).

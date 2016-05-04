@@ -4,8 +4,9 @@
   "description": "Find the most likely annotations of a sequence",
   "main": "src/main.js",
   "scripts": {
-    "start": "node src/main",
-    "test": "node src/test"
+    "start:viterbi": "node src/viterbi/main",
+    "start:posterior-decoding": "node src/posterior-decoding/main",
+    "test": "node src/viterbi/test && node src/posterior-decoding/test"
   },
   "repository": {
     "type": "git",

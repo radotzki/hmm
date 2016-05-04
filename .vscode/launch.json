@@ -2,10 +2,10 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch",
+			"name": "Launch Viterbi",
 			"type": "node",
 			"request": "launch",
-			"program": "${workspaceRoot}/src/main.js",
+			"program": "${workspaceRoot}/src/viterbi/main.js",
 			"stopOnEntry": false,
 			"args": [],
 			"cwd": "${workspaceRoot}",
@@ -22,10 +22,30 @@
 			"outDir": null
 		},
 		{
-			"name": "Test",
+			"name": "Test Viterbi",
 			"type": "node",
 			"request": "launch",
-			"program": "${workspaceRoot}/src/test.js",
+			"program": "${workspaceRoot}/src/viterbi/test.js",
+			"stopOnEntry": false,
+			"args": [],
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			},
+			"externalConsole": false,
+			"sourceMaps": false,
+			"outDir": null
+		},
+		{
+			"name": "Test posterior-decoding",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/src/posterior-decoding/test.js",
 			"stopOnEntry": false,
 			"args": [],
 			"cwd": "${workspaceRoot}",
