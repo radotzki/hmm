@@ -1,6 +1,11 @@
 # HMM
 
-This is a small project that computes:
+#### How to run
+- Install node
+- clone this repository
+- run `npm start`
+
+#### This is a small project that computes:
 - The most likely annotations of a sequence given an HMM (Viterbi algorithm).
 - The posterior-decoding (forward and backward algorithms).
 

@@ -25,6 +25,7 @@ function test1() {
             Healthy: [-2, -3.8365012677171206, -7.673002535434241],
             Fever: [-4.321928094887362, -5.473931188332413, -6.310432456049534],
         },
+        totalProb: -6.310432456049534,
     }
 
     const result = viterbi(observations, states, transition_probability, emission_probability, Math.log2);
@@ -56,6 +57,7 @@ function test2() {
                 -10.947862376664824, -14.006756065718392, -16.480687254050803,
                 -19.539580943104372, -22.013512131436787, -24.487443319769202],
         },
+        totalProb: -24.487443319769202,
     }
 
     const result = viterbi(observations, states, transition_probability, emission_probability, Math.log2);

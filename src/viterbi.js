@@ -31,12 +31,14 @@ function calc(obs, states, transProb, emitProb, logfn) {
         });
     }
 
-    annotations = traceBack(mat, states, numRows, numCols);
+    const tbResult = traceBack(mat, states, numRows, numCols);
+    annotations = tbResult.annotations;
+    totalProb = tbResult.totalProb;
     states.forEach(state => {
         probabilites[state] = mat[states.indexOf(state)].map(o => o.value);
     });
 
-    return { annotations, probabilites };
+    return { annotations, probabilites, totalProb };
 }
 
 function traceBack(mat, states, numRows, numCols) {
@@ -54,15 +56,15 @@ function traceBack(mat, states, numRows, numCols) {
 
     annotations.unshift(states[row]);
 
-    return annotations;
+    return { annotations, totalProb };
 }
 
 function matrixMaxValueLocation(matrix, numRows, numCols) {
     let biggestValue = Number.MIN_SAFE_INTEGER;
     let biggestLoc = { row: 0, col: 0 };
+    const col = numCols - 1;
 
     for (let row = 0; row < numRows; row++) {
-        const col = numCols - 1;
         if (matrix[row][col].value > biggestValue) {
             biggestValue = matrix[row][col].value;
             biggestLoc = { row, col };

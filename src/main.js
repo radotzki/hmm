@@ -3,7 +3,7 @@
 const viterbi = require('./viterbi');
 
 const states = ['B', 'A', '1', '2', '3', 'T']
-const observations = 'GACTGT';
+const observations = 'CCATCGCACTCCGATGTGGCCGGTGCTCACGTTGCCT';
 const transition_probability = {
     'B': { 'B': 0.95, 'A': 0.05 },
     'A': { '1': 1 },
@@ -23,5 +23,6 @@ const emission_probability = {
 
 const result = viterbi(observations, states, transition_probability, emission_probability, Math.log);
 
+console.log('Total Probability\n', result.totalProb);
 console.log('annotations\n', result.annotations);
 console.log('probabilites\n', result.probabilites);
