@@ -2,9 +2,10 @@
 
 const assert = require('assert');
 const forward = require('./forward');
+const backward = require('./backward');
 
 testForward();
-// test2();
+testBackward();
 
 function testForward() {
     const states = ['A', 'B'];
@@ -18,8 +19,8 @@ function testForward() {
         'B': { '0': 0.1, '1': 0.9 },
     };
     const start_probability = {
-      'A': 1,
-      'B': 0,
+        'A': 1,
+        'B': 0,
     };
 
     const expected = {
@@ -32,9 +33,9 @@ function testForward() {
     assert.deepEqual(result, expected);
 }
 
-function test2() {
+function testBackward() {
     const states = ['A', 'B'];
-    const observations = '11000010011111111000';
+    const observations = '01';
     const transition_probability = {
         'A': { 'A': 0.2, 'B': 0.8 },
         'B': { 'A': 0.8, 'B': 0.2 },
@@ -45,9 +46,11 @@ function test2() {
     };
 
     const expected = {
+        A: [-0.05955402844673724, 0],
+        B: [-0.5134741440870467, 0],
     };
 
-    const result = forward(observations, states, transition_probability, emission_probability, Math.log);
+    const result = backward(observations, states, transition_probability, emission_probability, Math.log10);
 
-    // assert.deepEqual(result, expected);
+    assert.deepEqual(result, expected);
 }
