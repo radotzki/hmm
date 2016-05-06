@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/radotzki/hmm/issues"
   },
-  "homepage": "https://github.com/radotzki/hmm#readme"
+  "homepage": "https://github.com/radotzki/hmm#readme",
+  "dependencies": {
+    "lodash": "^4.11.2"
+  }
 }

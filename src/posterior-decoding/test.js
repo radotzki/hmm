@@ -3,28 +3,49 @@
 const assert = require('assert');
 const forward = require('./forward');
 
-test1();
+testForward();
+// test2();
 
-function test1() {
-    const states = ['Healthy', 'Fever']
-    const observations = ['normal', 'cold', 'dizzy']
+function testForward() {
+    const states = ['A', 'B'];
+    const observations = '00';
     const transition_probability = {
-        'Healthy': { 'Healthy': 0.7, 'Fever': 0.3 },
-        'Fever': { 'Healthy': 0.4, 'Fever': 0.6 }
-    }
+        'A': { 'A': 0.2, 'B': 0.8 },
+        'B': { 'A': 0.8, 'B': 0.2 },
+    };
     const emission_probability = {
-        'Healthy': { 'normal': 0.5, 'cold': 0.4, 'dizzy': 0.1 },
-        'Fever': { 'normal': 0.1, 'cold': 0.3, 'dizzy': 0.6 }
-    }
+        'A': { '0': 0.9, '1': 0.1 },
+        'B': { '0': 0.1, '1': 0.9 },
+    };
+    const start_probability = {
+      'A': 1,
+      'B': 0,
+    };
 
     const expected = {
-        annotations: ['Healthy', 'Healthy', 'Fever'],
-        probabilites: {
-            Healthy: [-2, -3.8365012677171206, -7.673002535434241],
-            Fever: [-4.321928094887362, -5.473931188332413, -6.310432456049534],
-        },
-        totalProb: -6.310432456049534,
-    }
+        A: [-0.045757490560675115, -0.790484985457369],
+        B: [Number.NEGATIVE_INFINITY, -1.1426675035687315],
+    };
+
+    const result = forward(observations, states, transition_probability, emission_probability, start_probability, Math.log10);
+
+    assert.deepEqual(result, expected);
+}
+
+function test2() {
+    const states = ['A', 'B'];
+    const observations = '11000010011111111000';
+    const transition_probability = {
+        'A': { 'A': 0.2, 'B': 0.8 },
+        'B': { 'A': 0.8, 'B': 0.2 },
+    };
+    const emission_probability = {
+        'A': { '0': 0.9, '1': 0.1 },
+        'B': { '0': 0.1, '1': 0.9 },
+    };
+
+    const expected = {
+    };
 
     const result = forward(observations, states, transition_probability, emission_probability, Math.log);
 

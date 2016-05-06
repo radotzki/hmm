@@ -1,42 +1,39 @@
 'use strict';
 
-function calc(obs, states, transProb, emitProb, logfn) {
+const _ = require('lodash');
+
+function calc(obs, states, transProb, emitProb, startProb, logfn) {
     const numRows = states.length;
     const numCols = obs.length;
     const mat = Matrix({ rows: numRows, columns: numCols });
+    const result = {};
 
     for (let r = 0; r < numRows; r++) {
-        mat[r][0] = -1 + logfn(emitProb[states[r]][obs[0]]);
+        const state = states[r];
+        const prob = startProb[state] * emitProb[state][obs[0]];
+        mat[r][0] = prob !== 0 ? logfn(prob) : Number.NEGATIVE_INFINITY;
     }
 
-    for (let seqIndex = 1; seqIndex < numCols; seqIndex++) {
+    for (let obsIndex = 1; obsIndex < numCols; obsIndex++) {
         for (let stateIndex = 0; stateIndex < numRows; stateIndex++) {
-            const curState = states[stateIndex];
+            const state = states[stateIndex];
 
-            let aMax = Number.MIN_SAFE_INTEGER;
-            states.forEach(sl => {
-                if (transProb[sl][curState]) {
-                    const currentVal = mat[states.indexOf(sl)][seqIndex - 1] + logfn(transProb[sl][curState]);
-                    if (currentVal > aMax) {
-                        aMax = currentVal;
-                    }
-                }
-            });
+            // build an array of all als, when al = f[i-1,l] + log(t(sl->sj))
+            const als = states.map(sl => mat[states.indexOf(sl)][obsIndex - 1] + logfn(transProb[sl][state]));
+            const maxAl = _.max(als);
+            const bls = als.map(al => al - maxAl);
+            const sigma = bls.reduce((sum, bl) => sum + Math.exp(bl), 0);
 
-            let sigma = 0;
-            states.forEach(sl => {
-                if (transProb[sl][curState]) {
-                    const al = mat[states.indexOf(sl)][seqIndex - 1] + logfn(transProb[sl][curState]);
-                    const bl = al - aMax;
-                    sigma += Math.exp(bl);
-                }
-            });
-
-            mat[stateIndex][seqIndex] = logfn(sigma) + logfn(emitProb[curState][obs[seqIndex]]);
+            mat[stateIndex][obsIndex] = logfn(sigma) + maxAl + logfn(emitProb[state][obs[obsIndex]]);
         }
     }
 
-    console.log('mat', mat);
+    states.forEach(state => {
+        const stateIndex = states.indexOf(state);
+        result[state] = mat[stateIndex];
+    });
+
+    return result;
 }
 
 function Matrix(opts) {
