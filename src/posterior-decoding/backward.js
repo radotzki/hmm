@@ -20,11 +20,12 @@ module.exports = function (obs, states, transProb, emitProb, logfn) {
             // build an array of all als, when al = b[i+1,l] + log(t(sj->sl) + log(e(sl->Xi+1))
             const als = states.map(sl => mat[states.indexOf(sl)][obsIndex + 1] + logfn(transProb[state][sl] || 0) + logfn(emitProb[sl][obs[obsIndex + 1]] || 0));
             const maxAl = _.max(als);
-            const bls = als.map(al => al - maxAl);
+            const bls = als.map(al =>
+                al === Number.NEGATIVE_INFINITY && maxAl === Number.NEGATIVE_INFINITY ? 0 : al - maxAl);
             const sigma = bls.reduce((sum, bl) => sum + Math.exp(bl), 0);
             const prob = logfn(sigma) + maxAl;
 
-            mat[stateIndex][obsIndex] = isNaN(prob) ? Number.NEGATIVE_INFINITY : prob;
+            mat[stateIndex][obsIndex] = prob;
         }
     }
 

@@ -9,7 +9,7 @@ const posteriorDecoding = require('./posteriorDecoding');
 
 const logFunction = Math.log;
 const states = ['B', 'A', '1', '2', '3', 'T']
-const observations = 'CCATCGCACT';
+const observations = 'CCATCGCACTCCGATGTGGCCGGTGCTCACGTTGCCT';
 const transition_probability = {
     'B': { 'B': 0.95, 'A': 0.05 },
     'A': { '1': 1 },
