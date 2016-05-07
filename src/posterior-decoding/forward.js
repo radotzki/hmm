@@ -11,7 +11,7 @@ function calc(obs, states, transProb, emitProb, startProb, logfn) {
     for (let r = 0; r < numRows; r++) {
         const state = states[r];
         const prob = startProb[state] * emitProb[state][obs[0]];
-        mat[r][0] = prob !== 0 ? logfn(prob) : Number.NEGATIVE_INFINITY;
+        mat[r][0] = logfn(prob);
     }
 
     for (let obsIndex = 1; obsIndex < numCols; obsIndex++) {
@@ -19,12 +19,13 @@ function calc(obs, states, transProb, emitProb, startProb, logfn) {
             const state = states[stateIndex];
 
             // build an array of all als, when al = f[i-1,l] + log(t(sl->sj))
-            const als = states.map(sl => mat[states.indexOf(sl)][obsIndex - 1] + logfn(transProb[sl][state]));
+            const als = states.map(sl => mat[states.indexOf(sl)][obsIndex - 1] + logfn(transProb[sl][state] || 0));
             const maxAl = _.max(als);
             const bls = als.map(al => al - maxAl);
             const sigma = bls.reduce((sum, bl) => sum + Math.exp(bl), 0);
+            const prob = logfn(sigma) + maxAl + logfn(emitProb[state][obs[obsIndex]] || 0);
 
-            mat[stateIndex][obsIndex] = logfn(sigma) + maxAl + logfn(emitProb[state][obs[obsIndex]]);
+            mat[stateIndex][obsIndex] = isNaN(prob) ? Number.NEGATIVE_INFINITY : prob;
         }
     }
 
