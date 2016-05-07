@@ -8,8 +8,7 @@ const posteriorDecoding = require('./posteriorDecoding');
 
 testForward();
 testBackward();
-testMatrixMultiply1();
-testMatrixMultiply2();
+testMatrixMultiply();
 testPosteriorDecoding();
 
 function testForward() {
@@ -60,47 +59,17 @@ function testBackward() {
     assert.deepEqual(result, expected);
 }
 
-function testMatrixMultiply1() {
+function testMatrixMultiply() {
     const forwardMatrix = {
-        1: [1, 2, 3, 4],
-        2: [3, 4, 5, 6],
-        3: [6, 7, 8, 9],
+        1: [Math.log(1), Math.log(2)],
     };
 
     const backwardMatrix = {
-        1: [2, 2, 2, 2],
-        2: [3, 3, 3, 3],
-        3: [100, 1, 10, 1],
+        1: [Math.log(2), Math.log(2)],
     };
 
     const expected = {
-        1: [2, 4, 6, 8],
-        2: [9, 12, 15, 18],
-        3: [600, 7, 80, 9],
-    };
-
-    const result = matrixMultiply(forwardMatrix, backwardMatrix);
-
-    assert.deepEqual(result, expected);
-}
-
-function testMatrixMultiply2() {
-    const forwardMatrix = {
-        A: [1, 2, 3, 4],
-        B: [3, 4, 5, 6],
-        C: [-6, 7, 8, 9],
-    };
-
-    const backwardMatrix = {
-        A: [2, 2, 2, 2],
-        B: [3, 3, 3, 3],
-        C: [Number.NEGATIVE_INFINITY, 1, 10, 1],
-    };
-
-    const expected = {
-        A: [2, 4, 6, 8],
-        B: [9, 12, 15, 18],
-        C: [Number.NEGATIVE_INFINITY, 7, 80, 9],
+        1: [2, 4],
     };
 
     const result = matrixMultiply(forwardMatrix, backwardMatrix);

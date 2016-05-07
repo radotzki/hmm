@@ -13,11 +13,5 @@ module.exports = function (forwardMatrix, backwardMatrix) {
 };
 
 function arrayMultiply(a1, a2) {
-    return a1.map((value, index) => {
-        if (value === Number.NEGATIVE_INFINITY || a2[index] === Number.NEGATIVE_INFINITY) {
-            return Number.NEGATIVE_INFINITY;
-        } else {
-            return value * a2[index];
-        }
-    });
+    return a1.map((value, index) => Math.exp(value) * Math.exp(a2[index]));
 }
