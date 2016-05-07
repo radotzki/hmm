@@ -1,8 +1,9 @@
 'use strict';
 
 const _ = require('lodash');
+const Matrix = require('./matrix');
 
-function calc(obs, states, transProb, emitProb, startProb, logfn) {
+module.exports = function (obs, states, transProb, emitProb, startProb, logfn) {
     const numRows = states.length;
     const numCols = obs.length;
     const mat = Matrix({ rows: numRows, columns: numCols });
@@ -35,21 +36,4 @@ function calc(obs, states, transProb, emitProb, startProb, logfn) {
     });
 
     return result;
-}
-
-function Matrix(opts) {
-    if (!(this instanceof Matrix)) return new Matrix(opts);
-
-    const numRows = opts.rows;
-    const numCols = opts.columns;
-
-    for (var i = 0; i < numRows; i++) {
-        this[i] = [];
-
-        for (var j = 0; j < numCols; j++) {
-            this[i][j] = 0;
-        }
-    }
-}
-
-module.exports = calc;
+};
