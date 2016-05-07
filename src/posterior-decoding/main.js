@@ -41,7 +41,7 @@ const mapMatrix = matrixMultiply(forwardMatrix, backwardMatrix);
 const posteriorDecodingArray = posteriorDecoding(mapMatrix);
 
 // P(X|HMM) = ∑j F[n,j]
-const dataLogLikelihood = _.reduce(forwardMatrix, (sum, state) => sum + _.last(state), 0);
+const dataLogLikelihood = _.reduce(forwardMatrix, (sum, state) => sum + Math.exp(_.last(state)), 0);
 console.log('***** Data Log Likelihood *****');
 console.log(dataLogLikelihood);
 
