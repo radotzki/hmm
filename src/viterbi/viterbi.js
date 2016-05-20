@@ -1,6 +1,6 @@
 'use strict';
 
-function calc(obs, states, transProb, emitProb, logfn) {
+function calc(obs, states, transProb, emitProb, startTransProb, logfn) {
     const numRows = states.length;
     const numCols = obs.length;
     const mat = Matrix({ rows: numRows, columns: numCols });
@@ -9,7 +9,8 @@ function calc(obs, states, transProb, emitProb, logfn) {
     let totalProb;
 
     for (let r = 0; r < numRows; r++) {
-        mat[r][0].value = -1 + logfn(emitProb[states[r]][obs[0]]);
+        const state = states[r];
+        mat[r][0].value = logfn(startTransProb[state]) + logfn(emitProb[state][obs[0]]);
     }
 
     for (let t = 1; t < numCols; t++) {

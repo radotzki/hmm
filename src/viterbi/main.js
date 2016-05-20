@@ -20,6 +20,14 @@ const emission_probability = {
     '3': { 'A': 0, 'G': 0.4, 'C': 0.4, 'T': 0.2 },
     'T': { 'A': 0, 'G': 0, 'C': 0, 'T': 1 },
 }
+const startTransProb = {
+        'B': 1,
+        'A': 0,
+        '1': 0,
+        '2': 0,
+        '3': 0,
+        'T': 0,
+    }
 
 const result = viterbi(observations, states, transition_probability, emission_probability, Math.log);
 

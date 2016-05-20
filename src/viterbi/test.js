@@ -18,6 +18,10 @@ function test1() {
         'Healthy': { 'normal': 0.5, 'cold': 0.4, 'dizzy': 0.1 },
         'Fever': { 'normal': 0.1, 'cold': 0.3, 'dizzy': 0.6 }
     }
+    const startTransProb = {
+        'Healthy': 0.5,
+        'Fever': 0.5,
+    }
 
     const expected = {
         annotations: ['Healthy', 'Healthy', 'Fever'],
@@ -28,7 +32,7 @@ function test1() {
         totalProb: -6.310432456049534,
     }
 
-    const result = viterbi(observations, states, transition_probability, emission_probability, Math.log2);
+    const result = viterbi(observations, states, transition_probability, emission_probability, startTransProb, Math.log2);
 
     assert.deepEqual(result, expected);
 }
@@ -45,6 +49,10 @@ function test2() {
         'H': { 'A': 0.2, 'C': 0.3, 'G': 0.3, 'T': 0.2 },
         'L': { 'A': 0.3, 'C': 0.2, 'G': 0.2, 'T': 0.3 },
     };
+    const startTransProb = {
+        'H': 0.5,
+        'L': 0.5,
+    };
 
     const expected = {
         annotations: ['H', 'H', 'H', 'L', 'L', 'L', 'L', 'L', 'L'],
@@ -60,7 +68,7 @@ function test2() {
         totalProb: -24.487443319769202,
     }
 
-    const result = viterbi(observations, states, transition_probability, emission_probability, Math.log2);
+    const result = viterbi(observations, states, transition_probability, emission_probability, startTransProb, Math.log2);
 
     assert.deepEqual(result, expected);
 }
