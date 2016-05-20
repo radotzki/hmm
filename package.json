@@ -6,7 +6,8 @@
   "scripts": {
     "start:viterbi": "node src/viterbi/main",
     "start:posterior-decoding": "node src/posterior-decoding/main",
-    "test": "node src/viterbi/test && node src/posterior-decoding/test"
+    "start:gene-hmm-train": "node src/gene-hmm-train",
+    "test": "node src/viterbi/test && node src/posterior-decoding/test && node src/viterbi-training/test"
   },
   "repository": {
     "type": "git",
