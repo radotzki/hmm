@@ -37,7 +37,6 @@ module.exports = function (observations, annotations) {
 
 function SE(observations, annotations, a, b) {
     // pseudocount
-    // let count = 0;
     let count = 0.1;
     for (let j = 0; j < annotations.length; j++) {
         if (annotations[j] === a && observations[j] === b) {

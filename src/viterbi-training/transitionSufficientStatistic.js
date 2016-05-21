@@ -18,7 +18,6 @@ module.exports = function (annotations) {
 
 function ST(annotations, a, b) {
     // pseudocount
-    // let count = 0;
     let count = 0.1;
     for (let j = 0; j < annotations.length - 1; j++) {
         if (annotations[j] === a && annotations[j + 1] === b) {
