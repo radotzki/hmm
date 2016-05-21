@@ -1,11 +1,13 @@
 'use strict';
 
 const _ = require('lodash');
+const emissionSufficientStatistic = require('./emissionSufficientStatistic');
+const transitionSufficientStatistic = require('./transitionSufficientStatistic');
 const viterbi = require('../viterbi/viterbi');
 const printHeader = require('../gene-hmm-train/print').printHeader;
 const printStatus = require('../gene-hmm-train/print').printStatus;
 
-module.exports = function (observations, initTransitions, initEmissions, startProbability, transitionSufficientStatistic, emissionSufficientStatistic, threshold) {
+module.exports = function (observations, initTransitions, initEmissions, startProbability, threshold) {
     const states = _.keys(initTransitions);
     let transProb = Object.assign({}, initTransitions);
     let emisProb = Object.assign({}, initEmissions);

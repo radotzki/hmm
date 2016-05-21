@@ -7,7 +7,7 @@
     "start:viterbi": "node src/viterbi/main",
     "start:posterior-decoding": "node src/posterior-decoding/main",
     "start:gene-hmm-train": "node src/gene-hmm-train",
-    "test": "node src/viterbi/test && node src/posterior-decoding/test && node src/viterbi-training/test"
+    "test": "node src/viterbi/test && node src/posterior-decoding/test && node src/viterbi-training/test && node src/baum-welch/test"
   },
   "repository": {
     "type": "git",

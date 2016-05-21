@@ -5,7 +5,8 @@
 - Clone this repository
 - Viterbi: run `npm run start:viterbi`
 - Posterior Decoding: run `npm run start:posterior-decoding`
-- Viterbi Training: run `sh src/gene-hmm-train/example.sh`
+- Viterbi Training: run `sh src/gene-hmm-train/viterbi-training-example.sh`
+- Baum Welch: run `sh src/gene-hmm-train/baum-welch-example.sh`
 
 #### This is a small project that:
 - Computes the most likely annotations of a sequence given an HMM (Viterbi algorithm).

@@ -2,8 +2,6 @@
 
 const assert = require('assert');
 const viterbiTraining = require('./viterbiTraining');
-const emissionSufficientStatistic = require('../gene-hmm-train/emissionSufficientStatistic');
-const transitionSufficientStatistic = require('../gene-hmm-train/transitionSufficientStatistic');
 
 test1();
 
@@ -55,7 +53,7 @@ function test1() {
         lastProb: -53.447472039773395,
     };
 
-    const result = viterbiTraining(observations, initTransitions, initEmissions, startTransProb, transitionSufficientStatistic, emissionSufficientStatistic, threshold);
+    const result = viterbiTraining(observations, initTransitions, initEmissions, startTransProb, threshold);
 
     assert.deepEqual(result, expected);
 }

@@ -1,8 +1,7 @@
 'use strict';
 
 const viterbiTraining = require('../viterbi-training/viterbiTraining');
-const emissionSufficientStatistic = require('./emissionSufficientStatistic');
-const transitionSufficientStatistic = require('./transitionSufficientStatistic');
+const baumWelch = require('../baum-welch/baumWelch');
 
 const observations = process.argv[2];
 const algorithm = process.argv[3];
@@ -42,7 +41,7 @@ const startTransProb = {
 const threshold = 0.001;
 
 if (algorithm === 'V') {
-    viterbiTraining(observations, initTransitions, initEmissions, startTransProb, transitionSufficientStatistic, emissionSufficientStatistic, threshold);
+    viterbiTraining(observations, initTransitions, initEmissions, startTransProb, threshold);
 } else {
-
+    baumWelch(observations, initTransitions, initEmissions, startTransProb, threshold);
 }
