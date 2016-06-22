@@ -29,7 +29,7 @@ const startTransProb = {
         'T': 0,
     }
 
-const result = viterbi(observations, states, transition_probability, emission_probability, Math.log);
+const result = viterbi(observations, states, transition_probability, emission_probability, startTransProb, Math.log);
 
 console.log('Total Probability\n', result.totalProb);
 console.log('annotations\n', result.annotations);
